@@ -11,6 +11,13 @@
 //
 // });
 //
+
+
+var data = [
+  {id: 1, author: "Pete Hunt", text: "This is one comment"},
+  {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
+];
+
 /**
  * 聊天室组件类型
  */
@@ -25,7 +32,7 @@ class Chatroom extends React.Component {
             <div className="container">
                 <h1 className="page-header">{this.props.name} <a href="#{this.props.id}">#{this.props.id}</a></h1>
                 <p>this is react chatroom! </p>
-                <ChatList></ChatList>
+                <ChatList data={this.props.data}/>
                 <ChatForm></ChatForm>
             </div>
             /* jshint ignore:end */
@@ -38,13 +45,16 @@ class Chatroom extends React.Component {
  */
 class ChatList extends React.Component {
     render() {
+        /* jshint ignore:start */
+        var messages = this.props.data.map(function (item) {
+            return <Message key={item.id} author={item.author}>{item.text}</Message>
+        })
         return (
-            /* jshint ignore:start */
             <ul>
-                <Message author="iceStone">###### Hello world</Message>
+                {messages}
             </ul>
-            /* jshint ignore:end */
         );
+        /* jshint ignore:end */
     }
 }
 /**
@@ -58,7 +68,7 @@ class Message extends React.Component {
     render() {
         return (
             /* jshint ignore:start */
-            <li>
+            <li key={this.props.key}>
                 <h4>{this.props.author}</h4>
                 <pre dangerouslySetInnerHTML={this.raw(this.props.children)}></pre>
                 <hr/>
@@ -103,7 +113,7 @@ class ChatForm extends React.Component {
 }
 
 /* jshint ignore:start */
-var root = <Chatroom id="007" name="React Chatroom"></Chatroom>;
+var root = <Chatroom id="007" name="React Chatroom" data={data}></Chatroom>;
 /* jshint ignore:end */
 
 ReactDOM.render(root, document.querySelector('#content'), function () {
