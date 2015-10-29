@@ -1,0 +1,15 @@
+{
+  "name": "react-tutorial",
+  "version": "1.0.0",
+  "dependencies": {
+    "babelify": "^6.4.0",
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "iceStone <ice@micua.com>",
+  "license": "ISC"
+}
