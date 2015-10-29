@@ -41,9 +41,7 @@ class ChatList extends React.Component {
         return (
             /* jshint ignore:start */
             <ul>
-                <li>
-                    <Message/>
-                </li>
+                <Message author="iceStone">###### Hello world</Message>
             </ul>
             /* jshint ignore:end */
         );
@@ -53,14 +51,18 @@ class ChatList extends React.Component {
  * 消息实体
  */
 class Message extends React.Component {
+    raw(md) {
+        var html = marked(md, {sanitize: true});
+        return { __html: html };
+    }
     render() {
         return (
             /* jshint ignore:start */
-            <div>
-                <h3>iceStone</h3>
-                <pre></pre>
+            <li>
+                <h4>{this.props.author}</h4>
+                <pre dangerouslySetInnerHTML={this.raw(this.props.children)}></pre>
                 <hr/>
-            </div>
+            </li>
             /* jshint ignore:end */
         );
     }
